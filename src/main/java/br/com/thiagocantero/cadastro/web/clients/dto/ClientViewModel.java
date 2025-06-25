@@ -1,6 +1,7 @@
 package br.com.thiagocantero.cadastro.web.clients.dto;
 
 import br.com.thiagocantero.cadastro.core.models.Client;
+import br.com.thiagocantero.cadastro.core.utils.StringUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class ClientViewModel {
     private String phone;
 
     public String getPhone(){
-        return phone.replaceAll("(\\d{2})(\\d{5})(\\d{4})", "($1) $2-$3");
+        return StringUtils.formatPhone(phone);
     }
 
     public static ClientViewModel of(Client client) {
