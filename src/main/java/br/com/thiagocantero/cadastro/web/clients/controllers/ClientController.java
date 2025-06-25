@@ -16,6 +16,8 @@ import br.com.thiagocantero.cadastro.web.clients.dto.ClientForm;
 import br.com.thiagocantero.cadastro.web.clients.dto.ClientViewModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -72,7 +74,17 @@ public class ClientController {
             client.setId(id);
             clientRepository.save(client);
             return "redirect:/clients";
-        }    
+        }
+        
+        @GetMapping("/delete/{id}")
+        public String delete(@PathVariable Long id) {
+            if (!clientRepository.existsById(id)) {
+                throw new NoSuchElementException("Cliente não encontrado");
+            }
+            clientRepository.deleteById(id);
+            return "redirect:/clients";
+        }
+        
     }
 
 
