@@ -2,10 +2,12 @@ package br.com.thiagocantero.cadastro.web.clients.dto;
 
 import br.com.thiagocantero.cadastro.core.models.Client;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor  
 @AllArgsConstructor
 public class ClientViewModel {
@@ -23,11 +25,13 @@ public class ClientViewModel {
     }
 
     public static ClientViewModel of(Client client) {
-        return new ClientViewModel(
-            client.getId(),
-            client.getName(),
-            client.getEmail(),
-            client.getPhone()
-        );
+        return ClientViewModel.builder()
+            .id(client.getId())
+            .name(client.getName())
+            .email(client.getEmail())
+            .phone(client.getPhone())
+            .build();
+        
+        
     }
 }
